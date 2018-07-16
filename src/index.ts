@@ -16,10 +16,6 @@ app.get("/login", (req, res) => {
   )
 })
 
-app.get("/ejs_test", (rea, res) => {
-  res.render("test", { token: "foo", error: "bar" })
-})
-
 app.get("/spitchify_callback", (req, res) => {
   const code = req.query.code
   getToken(code)

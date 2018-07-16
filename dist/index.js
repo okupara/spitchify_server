@@ -23,9 +23,6 @@ app.use(body_parser_1.default.json());
 app.get("/login", (req, res) => {
     res.redirect(`https://accounts.spotify.com/authorize?response_type=code&client_id=${env.getApiClient()}&redirect_uri=${env.getRedirectURL()}`);
 });
-app.get("/ejs_test", (rea, res) => {
-    res.render("test", { token: "foo", error: "bar" });
-});
 app.get("/spitchify_callback", (req, res) => {
     const code = req.query.code;
     service_1.getToken(code)

@@ -1,1 +1,1 @@
-# spotify_on_media_server
+# spitchify_server
