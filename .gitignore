@@ -61,5 +61,3 @@ typings/
 .next
 
 .node-version
-dist/**/*.js
-dist/**/*.js.map
