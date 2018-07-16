@@ -7,7 +7,6 @@ const querystring_1 = __importDefault(require("querystring"));
 const axios_1 = __importDefault(require("axios"));
 const env_1 = require("./env");
 const URL_GET_TOKEN = "https://accounts.spotify.com/api/token";
-console.log(env_1.getEncodedAuthorization());
 exports.getToken = (code) => axios_1.default
     .post(URL_GET_TOKEN, querystring_1.default.stringify({
     code,
@@ -21,7 +20,6 @@ exports.getToken = (code) => axios_1.default
 })
     .then(response => {
     const { access_token, expires_in } = response.data;
-    console.log("zuuu", access_token, expires_in);
     return Promise.resolve({
         access_token,
         expires_in,

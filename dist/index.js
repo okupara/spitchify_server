@@ -28,10 +28,8 @@ app.get("/ejs_test", (rea, res) => {
 });
 app.get("/spitchify_callback", (req, res) => {
     const code = req.query.code;
-    console.log(req.query);
     service_1.getToken(code)
         .then(data => {
-        console.log("data", data);
         res.render("callback", data);
     })
         .catch(ex => {
@@ -40,6 +38,5 @@ app.get("/spitchify_callback", (req, res) => {
     });
 });
 app.listen(env.getPort(), () => {
-    console.log("FKJDKJFKDJKF");
     console.log(env.getRedirectURL());
 });
