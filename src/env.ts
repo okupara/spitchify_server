@@ -13,5 +13,4 @@ export const getRedirectProtocol = () => REDIRECT_PROTOCOL
 export const getRedirectHost = () => REDIRECT_HOST
 export const getRedirectURL = () => CALLBACK_URL
 export const getEncodedAuthorization = () =>
-  console.log(`${API_CLIENT}:${API_SECRET}`) ||
   Buffer.from(`${API_CLIENT}:${API_SECRET}`).toString("base64")
