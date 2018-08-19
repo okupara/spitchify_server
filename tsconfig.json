@@ -8,7 +8,10 @@
     "sourceMap": false,
     "outDir": "dist",
     "baseUrl": ".",
-    "lib": ["dom", "es2017", "esnext"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowJs": true,
+    "lib": ["dom", "es2016", "esnext"],
     "paths": {
       "*": ["node_modules/*", "src/types/*"]
     }

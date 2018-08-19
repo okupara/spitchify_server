@@ -1,33 +1,27 @@
-import express from "express"
-import path from "path"
-import bodyParser from "body-parser"
-import { getToken } from "./service"
+import { GraphQLServer } from "graphql-yoga"
+import { buildSchema } from "type-graphql"
 import * as env from "./env"
+import { AlbumResolver } from "./resolvers"
+import bindUserOauth from "./user-oauth"
 
-const app = express()
-app.set("views", path.join(process.cwd(), "views"))
-app.set("view engine", "ejs")
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+const bootStrap = async () => {
+  const schema = await buildSchema({
+    resolvers: [AlbumResolver]
+  })
 
-app.get("/login", (req, res) => {
-  res.redirect(
-    `https://accounts.spotify.com/authorize?response_type=code&client_id=${env.getApiClient()}&redirect_uri=${env.getRedirectURL()}`
-  )
-})
+  const server = new GraphQLServer({ schema })
 
-app.get("/spitchify_callback", (req, res) => {
-  const code = req.query.code
-  getToken(code)
-    .then(data => {
-      res.render("callback", data)
-    })
-    .catch(ex => {
-      console.log(ex)
-      res.send(`ERROR: ${ex}`)
-    })
-})
+  const serverOptions = {
+    port: env.port,
+    endpoint: "/graphql",
+    playground: "/playground"
+  }
 
-app.listen(env.getPort(), () => {
-  console.log(env.getRedirectURL())
-})
+  bindUserOauth(server.express)
+
+  server.start(serverOptions, () => {
+    console.log(`Server is running... the port is ${serverOptions.port}.`)
+  })
+}
+
+bootStrap()

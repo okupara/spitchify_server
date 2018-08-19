@@ -1,5 +1,5 @@
 const {
-  PORT = 3000,
+  PORT = 3333,
   API_CLIENT = "",
   API_SECRET = "",
   REDIRECT_PROTOCOL = "http",
@@ -7,10 +7,11 @@ const {
 } = process.env
 
 const CALLBACK_URL = `${REDIRECT_PROTOCOL}://${REDIRECT_HOST}:${PORT}/spitchify_callback`
-export const getPort = () => PORT
-export const getApiClient = () => API_CLIENT
-export const getRedirectProtocol = () => REDIRECT_PROTOCOL
-export const getRedirectHost = () => REDIRECT_HOST
-export const getRedirectURL = () => CALLBACK_URL
+export const port = PORT
+export const apiClient = API_CLIENT
+export const apiSecret = API_SECRET
+export const redirectProtocol = REDIRECT_PROTOCOL
+export const redirectHost = REDIRECT_HOST
+export const redirectUrl = CALLBACK_URL
 export const getEncodedAuthorization = () =>
   Buffer.from(`${API_CLIENT}:${API_SECRET}`).toString("base64")
